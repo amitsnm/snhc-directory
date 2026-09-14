@@ -1,68 +1,45 @@
 import { useState } from 'react'
-import { DirectoryTable } from './components/DirectoryTable'
 import { HeaderBar } from './components/HeaderBar'
-import { SearchFilters } from './components/SearchFilters'
-import { StatusFooter } from './components/StatusFooter'
-import { useDirectory } from './hooks/useDirectory'
-import type { ViewMode } from './types/directory'
+import { PORTAL_NAV, type PortalPage } from './data/portal'
+import { DoctorsPage } from './pages/DoctorsPage'
+import { HomePage } from './pages/HomePage'
+import { IntercomPage } from './pages/IntercomPage'
+import { ServiceMasterPage } from './pages/ServiceMasterPage'
+import { SpecialityPage } from './pages/SpecialityPage'
 import './App.css'
 
-const VIEW_KEY = 'snc-directory-view'
+const PAGE_KEY = 'snhc-portal-page'
 
-function loadView(): ViewMode {
-  const saved = localStorage.getItem(VIEW_KEY)
-  if (saved === 'list' || saved === 'grid' || saved === 'floor' || saved === 'department') {
-    return saved
+function loadPage(): PortalPage {
+  const saved = localStorage.getItem(PAGE_KEY)
+  if (PORTAL_NAV.some((item) => item.id === saved)) {
+    return saved as PortalPage
   }
-  return 'department'
+  return 'home'
 }
 
 export default function App() {
-  const {
-    ready,
-    entries,
-    totalCount,
-    filters,
-    setFilter,
-    clearFilters,
-    filterOptions,
-    status,
-    sync,
-    config,
-  } = useDirectory()
+  const [page, setPage] = useState<PortalPage>(loadPage)
 
-  const [viewMode, setViewMode] = useState<ViewMode>(loadView)
-
-  const onViewMode = (mode: ViewMode) => {
-    setViewMode(mode)
-    localStorage.setItem(VIEW_KEY, mode)
+  const onNavigate = (next: PortalPage) => {
+    setPage(next)
+    localStorage.setItem(PAGE_KEY, next)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
     <div className="app-shell">
       <div className="atmosphere" aria-hidden />
-      <HeaderBar />
-      <div className="app-frame">
-        <SearchFilters
-          filters={filters}
-          options={filterOptions}
-          resultCount={entries.length}
-          totalCount={totalCount}
-          viewMode={viewMode}
-          onViewMode={onViewMode}
-          onChange={setFilter}
-          onClear={clearFilters}
-        />
-        <main className="directory-main">
-          {!ready ? (
-            <div className="loading-state">
-              <p>Opening local directory…</p>
-            </div>
-          ) : (
-            <DirectoryTable entries={entries} config={config} viewMode={viewMode} />
-          )}
-        </main>
-        <StatusFooter status={status} onRefresh={() => void sync()} />
+      <HeaderBar activePage={page} onNavigate={onNavigate} />
+      <div className={`app-frame${page === 'intercom' ? ' app-frame-flush' : ''}`}>
+        {page === 'home' ? <HomePage onNavigate={onNavigate} /> : null}
+        {page === 'service-master' ? <ServiceMasterPage /> : null}
+        {page === 'intercom' ? <IntercomPage /> : null}
+    {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}
+        {page === 'speciality' ? <SpecialityPage /> : null}
+        {page === 'packages' ? (
+          <ServiceMasterPage title="Packages" presetTypes={['IP Package', 'OP Package', 'Care Plan']} />
+        ) : null}
       </div>
     </div>
   )

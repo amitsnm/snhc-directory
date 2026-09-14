@@ -9,9 +9,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['snhc-mark.png', 'snhc-logo.png', 'apple-touch-icon.png'],
       manifest: {
-        name: 'Sant Nirankari Health City Directory',
-        short_name: 'SNHC Directory',
-        description: 'Sant Nirankari Health City intercom directory with LDAP and IPBX',
+        name: 'Sant Nirankari Health City Internal Portal',
+        short_name: 'SNHC Portal',
+        description: 'Sant Nirankari Health City internal portal — services, directory, doctors, speciality, packages',
         theme_color: '#004239',
         background_color: '#000000',
         display: 'standalone',
