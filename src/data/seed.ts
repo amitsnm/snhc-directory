@@ -9,9 +9,9 @@ export const DEFAULT_CONFIG: AppConfig = {
   syncIntervalMs: Number(import.meta.env.VITE_SYNC_INTERVAL_MS ?? 60_000),
 }
 
-/** Header strip — SNHC Extension Directory (as on 25-Aug-2026) */
+/** Header strip — SNHC Extension Directory (Apps Script, as on 05-Sep-2026) */
 export const COMPLEX_META = {
-  asOn: '25-Aug-2026',
+  asOn: '05-Sep-2026',
   reception: '1100, 1500',
   epabx: '',
   fax: '',
@@ -29,7 +29,7 @@ export const EMERGENCY_CODES = [
   { id: 'silver', name: 'Silver', meaning: 'Active shooter / weapon', extension: '9999', color: '#607d8b' },
 ] as const
 
-/** Quick dial / helpdesk — from SNHC Directory 25-Aug-2026 */
+/** Quick dial / helpdesk — from Apps Script Extension Directory */
 export const HELPDESK_CONTACTS = [
   { id: 'it', name: 'IT Helpdesk', extension: '1559' },
   { id: 'reception', name: 'Main Reception', extension: '1100' },
@@ -41,5 +41,9 @@ export const HELPDESK_CONTACTS = [
   { id: 'pharmacy', name: 'OPD Pharmacy', extension: '1161' },
 ] as const
 
-/** Seed from SNHC Directory 20260825.pdf — offline-first */
+/** Seed from hospital Apps Script Extension Directory — offline-first */
 export const SEED_DIRECTORY: DirectoryEntry[] = snhcDirectory as DirectoryEntry[]
+
+/** Public Apps Script web app used as the live directory source of truth. */
+export const APPS_SCRIPT_DIRECTORY_URL =
+  'https://script.google.com/macros/s/AKfycbzySdeUADo7lWCGsuCANCYzMJ-pEMIKQywbUjz9zLP_giqNuyienmwsdW354uNeu7C8/exec'

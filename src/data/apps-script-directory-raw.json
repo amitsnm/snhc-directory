@@ -1,0 +1,650 @@
+{
+  "management": [
+    {
+      "ext": "1510",
+      "label": "CEO"
+    },
+    {
+      "ext": "1520",
+      "label": "COO"
+    },
+    {
+      "ext": "1560",
+      "label": "CFO"
+    },
+    {
+      "ext": "1570",
+      "label": "CCS"
+    },
+    {
+      "ext": "1010",
+      "label": "MS"
+    },
+    {
+      "ext": "1580",
+      "label": "CNO"
+    },
+    {
+      "ext": "1011",
+      "label": "CMO"
+    }
+  ],
+  "staff": [
+    {
+      "ext": "1062",
+      "label": "Account Office"
+    },
+    {
+      "ext": "1539",
+      "label": "Adil, SCM"
+    },
+    {
+      "ext": "1528",
+      "label": "Aditya Rai, HR"
+    },
+    {
+      "ext": "1552",
+      "label": "AGM -IT"
+    },
+    {
+      "ext": "1545",
+      "label": "Ajay Jangra, BME"
+    },
+    {
+      "ext": "1522",
+      "label": "Anuradha, Operations"
+    },
+    {
+      "ext": "1529",
+      "label": "Ashmita Sethi, HR"
+    },
+    {
+      "ext": "1523",
+      "label": "Ausaf Alam, Operations"
+    },
+    {
+      "ext": "1202",
+      "label": "Blood Bank- Reception"
+    },
+    {
+      "ext": "1222",
+      "label": "Cemo-Office"
+    },
+    {
+      "ext": "1280",
+      "label": "Chemotherapy NS-1"
+    },
+    {
+      "ext": "1281",
+      "label": "Chemotherapy NS-1"
+    },
+    {
+      "ext": "1280",
+      "label": "Chemotherapy NS-1"
+    },
+    {
+      "ext": "1281",
+      "label": "Chemotherapy NS-1"
+    },
+    {
+      "ext": "1282",
+      "label": "Chemotherapy NS-2"
+    },
+    {
+      "ext": "1282",
+      "label": "Chemotherapy NS-2"
+    },
+    {
+      "ext": "1270",
+      "label": "Chemotherapy- Doctor Room"
+    },
+    {
+      "ext": "1270",
+      "label": "Chemotherapy- Doctor Room"
+    },
+    {
+      "ext": "1575",
+      "label": "Clinical Ops"
+    },
+    {
+      "ext": "1273",
+      "label": "Consultant Room 1- IVF"
+    },
+    {
+      "ext": "1273",
+      "label": "Consultant Room 1- IVF"
+    },
+    {
+      "ext": "1272",
+      "label": "Consultant Room 2- IVF"
+    },
+    {
+      "ext": "1272",
+      "label": "Consultant Room 2- IVF"
+    },
+    {
+      "ext": "1670",
+      "label": "Contact Centre"
+    },
+    {
+      "ext": "1671",
+      "label": "Contact Centre"
+    },
+    {
+      "ext": "1672",
+      "label": "Contact Centre"
+    },
+    {
+      "ext": "1274",
+      "label": "Counselling Room- IVF"
+    },
+    {
+      "ext": "1274",
+      "label": "Counselling Room- IVF"
+    },
+    {
+      "ext": "1221",
+      "label": "Dailysis-Office"
+    },
+    {
+      "ext": "1200",
+      "label": "Daycare - Main Reception"
+    },
+    {
+      "ext": "1284",
+      "label": "Daycare NS-1"
+    },
+    {
+      "ext": "1285",
+      "label": "Daycare NS-1"
+    },
+    {
+      "ext": "1284",
+      "label": "Daycare NS-1"
+    },
+    {
+      "ext": "1285",
+      "label": "Daycare NS-1"
+    },
+    {
+      "ext": "1566",
+      "label": "Deepak Khurana, Pharmacy"
+    },
+    {
+      "ext": "1598",
+      "label": "Deepak Vats , Security"
+    },
+    {
+      "ext": "1568",
+      "label": "Divya Kataria, Physiotherapy"
+    },
+    {
+      "ext": "1275",
+      "label": "Donor Counselling -Blood Bank"
+    },
+    {
+      "ext": "1275",
+      "label": "Donor Counselling -Blood Bank"
+    },
+    {
+      "ext": "1143",
+      "label": "Dr Devendra Kumar Agarwal room 143"
+    },
+    {
+      "ext": "1125",
+      "label": "Dr Dharmesh L. Khatri  room 125"
+    },
+    {
+      "ext": "1121",
+      "label": "Dr Dibya Jyoti Mahakul room 121"
+    },
+    {
+      "ext": "1166",
+      "label": "Dr Girraj Kishor Agarwal room 166"
+    },
+    {
+      "ext": "1106",
+      "label": "Dr Gurmeet Singh room 106"
+    },
+    {
+      "ext": "1108",
+      "label": "Dr Hanish Gupta room 108"
+    },
+    {
+      "ext": "1111",
+      "label": "Dr Komal Sukhija room 111"
+    },
+    {
+      "ext": "1075",
+      "label": "Dr Mandeep"
+    },
+    {
+      "ext": "1112",
+      "label": "Dr Manmeet Kaur room 112"
+    },
+    {
+      "ext": "1115",
+      "label": "Dr Mohit Mann room 115"
+    },
+    {
+      "ext": "1527",
+      "label": "Dr Saloni Jindal, HR"
+    },
+    {
+      "ext": "1116",
+      "label": "Dr Sandeep Kumar room 116"
+    },
+    {
+      "ext": "1119",
+      "label": "Dr Sanjeet Kumar Rai room 119"
+    },
+    {
+      "ext": "1149",
+      "label": "Dr Saurabh Mishra room 149"
+    },
+    {
+      "ext": "1105",
+      "label": "Dr Sonali Verma room105"
+    },
+    {
+      "ext": "1127",
+      "label": "Dr Sumit room 127"
+    },
+    {
+      "ext": "1148",
+      "label": "Dr Sushil Kumar Mishra room 148"
+    },
+    {
+      "ext": "1120",
+      "label": "Dr Tushar Sharma room 120"
+    },
+    {
+      "ext": "1109",
+      "label": "Dr Vandana Gulati Dhingra room 109"
+    },
+    {
+      "ext": "1164",
+      "label": "Dr. Naimaa K. Chaudhary room 164"
+    },
+    {
+      "ext": "1576",
+      "label": "Dr. Nitin"
+    },
+    {
+      "ext": "1160",
+      "label": "Dr.(Prof.) Indu Chawla Chugh room 160"
+    },
+    {
+      "ext": "1086",
+      "label": "ER / Nursing Station"
+    },
+    {
+      "ext": "1087",
+      "label": "ER / Nursing Station"
+    },
+    {
+      "ext": "1080",
+      "label": "ER / Reception"
+    },
+    {
+      "ext": "1081",
+      "label": "ER / Reception"
+    },
+    {
+      "ext": "1022",
+      "label": "EWS Counter"
+    },
+    {
+      "ext": "1099",
+      "label": "Fire Control Room"
+    },
+    {
+      "ext": "1516",
+      "label": "Harjeet Singh Bhalla, Legal"
+    },
+    {
+      "ext": "1550",
+      "label": "Head -IT"
+    },
+    {
+      "ext": "1070",
+      "label": "Healthcheckup Reception"
+    },
+    {
+      "ext": "1515",
+      "label": "Himanshu Nath, Project"
+    },
+    {
+      "ext": "1253",
+      "label": "Histopathlogy Consultant Room"
+    },
+    {
+      "ext": "1100",
+      "label": "Investigation Counter"
+    },
+    {
+      "ext": "1065",
+      "label": "IP Admission"
+    },
+    {
+      "ext": "1066",
+      "label": "IP Admission"
+    },
+    {
+      "ext": "1067",
+      "label": "IP Admission"
+    },
+    {
+      "ext": "1068",
+      "label": "IP Admission"
+    },
+    {
+      "ext": "1069",
+      "label": "IP Admission"
+    },
+    {
+      "ext": "1203",
+      "label": "IVF- Reception"
+    },
+    {
+      "ext": "1500",
+      "label": "Main Reception / H24 Help"
+    },
+    {
+      "ext": "1500",
+      "label": "Main Reception / H24 Help"
+    },
+    {
+      "ext": "1533",
+      "label": "Manager Operations"
+    },
+    {
+      "ext": "1577",
+      "label": "Manisha -HR Helpdesk"
+    },
+    {
+      "ext": "1531",
+      "label": "Marketing"
+    },
+    {
+      "ext": "1532",
+      "label": "Marketing"
+    },
+    {
+      "ext": "1254",
+      "label": "Microbiology Consultant Room"
+    },
+    {
+      "ext": "1254",
+      "label": "Microbiology Consultant Room"
+    },
+    {
+      "ext": "1581",
+      "label": "Molly Thomas,DNS"
+    },
+    {
+      "ext": "1567",
+      "label": "Nitesh Raghav, Pharmacy"
+    },
+    {
+      "ext": "1183",
+      "label": "Nursing Station -3"
+    },
+    {
+      "ext": "1161",
+      "label": "OPD Pharmacy"
+    },
+    {
+      "ext": "1162",
+      "label": "OPD Pharmacy"
+    },
+    {
+      "ext": "1104",
+      "label": "OPD room No 104"
+    },
+    {
+      "ext": "1107",
+      "label": "OPD room No 107"
+    },
+    {
+      "ext": "1113",
+      "label": "OPD room No 113"
+    },
+    {
+      "ext": "1114",
+      "label": "OPD room No 114"
+    },
+    {
+      "ext": "1122",
+      "label": "OPD room No 122"
+    },
+    {
+      "ext": "1123",
+      "label": "OPD room No 123"
+    },
+    {
+      "ext": "1128",
+      "label": "OPD room No 128"
+    },
+    {
+      "ext": "1129",
+      "label": "OPD room No 129"
+    },
+    {
+      "ext": "1130",
+      "label": "OPD room No 130"
+    },
+    {
+      "ext": "1141",
+      "label": "OPD room No 141"
+    },
+    {
+      "ext": "1144",
+      "label": "OPD room No 144"
+    },
+    {
+      "ext": "1145",
+      "label": "OPD room No 145"
+    },
+    {
+      "ext": "1150",
+      "label": "OPD room No 150"
+    },
+    {
+      "ext": "1151",
+      "label": "OPD room No 151"
+    },
+    {
+      "ext": "1152",
+      "label": "OPD room No 152"
+    },
+    {
+      "ext": "1153",
+      "label": "OPD room No 153"
+    },
+    {
+      "ext": "1155",
+      "label": "OPD room No 155"
+    },
+    {
+      "ext": "1534",
+      "label": "Ops team"
+    },
+    {
+      "ext": "1252",
+      "label": "Pathlogy Consultant Room"
+    },
+    {
+      "ext": "1252",
+      "label": "Pathlogy Consultant Room"
+    },
+    {
+      "ext": "1230",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1231",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1233",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1230",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1231",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1233",
+      "label": "Physiotherapy"
+    },
+    {
+      "ext": "1201",
+      "label": "Physiotherapy - Main Reception"
+    },
+    {
+      "ext": "1380",
+      "label": "PICU Nursing Station"
+    },
+    {
+      "ext": "1380",
+      "label": "PICU Nursing Station"
+    },
+    {
+      "ext": "1003",
+      "label": "PRO"
+    },
+    {
+      "ext": "1103",
+      "label": "PRO"
+    },
+    {
+      "ext": "1034",
+      "label": "Radiologist 1"
+    },
+    {
+      "ext": "1030",
+      "label": "Radiology reception"
+    },
+    {
+      "ext": "1031",
+      "label": "Radiology reception"
+    },
+    {
+      "ext": "1530",
+      "label": "Rahul Arora, Marketing"
+    },
+    {
+      "ext": "1524",
+      "label": "Rahul Sharma, Operations"
+    },
+    {
+      "ext": "1537",
+      "label": "Rajeev Kumar Malik, SCM"
+    },
+    {
+      "ext": "1165",
+      "label": "Registration Counter"
+    },
+    {
+      "ext": "1167",
+      "label": "Registration Counter"
+    },
+    {
+      "ext": "1168",
+      "label": "Registration Counter"
+    },
+    {
+      "ext": "1169",
+      "label": "Registration Counter"
+    },
+    {
+      "ext": "1525",
+      "label": "Sabyasachi Roy, HR"
+    },
+    {
+      "ext": "1074",
+      "label": "Salina, PHC"
+    },
+    {
+      "ext": "1204",
+      "label": "Sample Receving"
+    },
+    {
+      "ext": "1565",
+      "label": "Saumen Malik, Finance"
+    },
+    {
+      "ext": "1250",
+      "label": "Services (Medical)"
+    },
+    {
+      "ext": "1250",
+      "label": "Services (Medical)"
+    },
+    {
+      "ext": "1526",
+      "label": "Shivani, HR"
+    },
+    {
+      "ext": "1564",
+      "label": "Shubhneet, Finance"
+    },
+    {
+      "ext": "1061",
+      "label": "Sohan, Finance"
+    },
+    {
+      "ext": "1538",
+      "label": "Sunil Kumar, SCM"
+    },
+    {
+      "ext": "1072",
+      "label": "TMT"
+    },
+    {
+      "ext": "1063",
+      "label": "TPA"
+    },
+    {
+      "ext": "1064",
+      "label": "TPA"
+    },
+    {
+      "ext": "1073",
+      "label": "USG"
+    },
+    {
+      "ext": "1036",
+      "label": "USG Room 1"
+    },
+    {
+      "ext": "1536",
+      "label": "Vikas Kumar, SCM"
+    },
+    {
+      "ext": "1578",
+      "label": "Vinay- HR OPs"
+    },
+    {
+      "ext": "1521",
+      "label": "Vipin Dhawan, Operations"
+    },
+    {
+      "ext": "1060",
+      "label": "Virender Rawat, Finance"
+    },
+    {
+      "ext": "1546",
+      "label": "Vishal Rana, BME"
+    }
+  ],
+  "published": "Published\nSat Sep 05 2026 00:00:00 GMT+0530 (India Standard Time)\nIT Help Desk (0930-1730) Week days\n1559, 8800011659",
+  "totalText": "160 entries total",
+  "mgmtCount": 7,
+  "staffCount": 153
+}

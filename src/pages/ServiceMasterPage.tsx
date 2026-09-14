@@ -45,24 +45,14 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
         if (!hay.includes(q)) return false
       }
       return true
-    }).slice(0, 500)
+    })
   }, [query, serviceType, department, presetTypes])
 
-  const totalMatching = useMemo(() => {
-    const q = query.trim().toLowerCase()
-    return ALL.filter((row) => {
-      if (presetTypes?.length && !presetTypes.includes(row.serviceType)) return false
-      if (serviceType && row.serviceType !== serviceType) return false
-      if (department && row.department !== department) return false
-      if (q.length >= 2) {
-        const hay = [row.serviceItem, row.code, row.department, row.serviceType, row.billingCategory]
-          .join(' ')
-          .toLowerCase()
-        if (!hay.includes(q)) return false
-      }
-      return true
-    }).length
-  }, [query, serviceType, department, presetTypes])
+  const hasActiveSearch = query.trim().length >= 2 || Boolean(serviceType) || Boolean(department)
+  /** Unfiltered catalogue is huge — cap browse mode only; searches show every match. */
+  const BROWSE_LIMIT = 1000
+  const visible = hasActiveSearch ? filtered : filtered.slice(0, BROWSE_LIMIT)
+  const totalMatching = filtered.length
 
   return (
     <section className="portal-page service-master-page" aria-label={title}>
@@ -102,8 +92,11 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
           ))}
         </select>
         <p className="toolbar-count">
-          Showing <strong>{filtered.length}</strong>
-          {totalMatching > filtered.length ? ` of ${totalMatching}` : ''} services
+          Showing <strong>{visible.length}</strong>
+          {totalMatching > visible.length ? ` of ${totalMatching}` : ''} services
+          {!hasActiveSearch && totalMatching > visible.length
+            ? ' — search or filter to see all matching rows'
+            : ''}
         </p>
       </div>
 
@@ -120,8 +113,8 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
             </tr>
           </thead>
           <tbody>
-            {filtered.map((row, idx) => (
-              <tr key={`${row.code}-${row.serviceItem}-${row.billingCategory}-${idx}`}>
+            {visible.map((row, idx) => (
+              <tr key={`${row.code}-${row.billingCategory}-${row.price}-${idx}`}>
                 <td className="cell-person">{row.serviceItem}</td>
                 <td>{row.code || '—'}</td>
                 <td>{row.serviceType || '—'}</td>
@@ -134,7 +127,7 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
             ))}
           </tbody>
         </table>
-        {filtered.length === 0 ? (
+        {visible.length === 0 ? (
           <div className="empty-state">
             <h2>No services found</h2>
             <p>Try another search or clear the filters.</p>

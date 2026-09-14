@@ -6,6 +6,7 @@ import { HomePage } from './pages/HomePage'
 import { IntercomPage } from './pages/IntercomPage'
 import { ServiceMasterPage } from './pages/ServiceMasterPage'
 import { PackagesPage } from './pages/PackagesPage'
+import { HelpdeskPage } from './pages/HelpdeskPage'
 import { SpecialityPage } from './pages/SpecialityPage'
 import './App.css'
 
@@ -34,6 +35,7 @@ export default function App() {
       <HeaderBar activePage={page} onNavigate={onNavigate} />
       <div className={`app-frame${page === 'intercom' ? ' app-frame-flush' : ''}`}>
         {page === 'home' ? <HomePage onNavigate={onNavigate} /> : null}
+        {page === 'helpdesk' ? <HelpdeskPage /> : null}
         {page === 'service-master' ? <ServiceMasterPage /> : null}
         {page === 'intercom' ? <IntercomPage /> : null}
     {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}

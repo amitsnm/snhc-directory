@@ -6,7 +6,7 @@ const DB_VERSION = 2
 const STORE = 'entries'
 const META = 'meta'
 /** Bump when seed / location schema changes so offline cache refreshes. */
-const DATA_SCHEMA = 'snhc-directory-25-aug-2026-v1'
+const DATA_SCHEMA = 'snhc-apps-script-directory-05-sep-2026-v1'
 
 function openDb(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {

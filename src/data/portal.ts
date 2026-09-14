@@ -1,5 +1,6 @@
 export type PortalPage =
   | 'home'
+  | 'helpdesk'
   | 'service-master'
   | 'intercom'
   | 'doctors'
@@ -14,16 +15,22 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
     blurb: 'Sant Nirankari Health City staff portal for services, directory, and clinical references.',
   },
   {
+    id: 'helpdesk',
+    label: 'Helpdesk',
+    title: 'Helpdesk',
+    blurb: 'Grievance & Feedback, Enquiry, and Complaint tickets with TAT, assignment, and escalation.',
+  },
+  {
     id: 'service-master',
     label: 'Service Master',
     title: 'Service Master',
-    blurb: 'Tariff and service catalogue with prices, departments, and billing categories.',
+    blurb: 'Full tariff catalogue with every billing category and price row from Service Master.',
   },
   {
     id: 'intercom',
     label: 'Intercom Directory',
     title: 'Intercom Directory',
-    blurb: 'Extension numbers for leadership, departments, OPD rooms, and support desks.',
+    blurb: 'Extension numbers from the hospital Apps Script directory (Management + Departments & Staff).',
   },
   {
     id: 'doctors',

@@ -1,0 +1,16 @@
+{
+  "source": "apps-script",
+  "url": "https://script.google.com/macros/s/AKfycbzySdeUADo7lWCGsuCANCYzMJ-pEMIKQywbUjz9zLP_giqNuyienmwsdW354uNeu7C8/exec",
+  "publishedChip": "Published\nSat Sep 05 2026 00:00:00 GMT+0530 (India Standard Time)\nIT Help Desk (0930-1730) Week days\n1559, 8800011659",
+  "totalText": "160 entries total",
+  "mgmtCount": 7,
+  "staffCount": 153,
+  "asOn": "05-Sep-2026",
+  "helpdesk": {
+    "label": "IT Help Desk (0930-1730) Week days",
+    "extensions": [
+      "1559"
+    ],
+    "mobile": "8800011659"
+  }
+}

@@ -52,7 +52,7 @@ export interface DeptLocation {
 
 /**
  * Optional department → location catalog.
- * SNHC Directory 25-Aug-2026 seed does not include floor/zone mapping yet,
+ * SNHC Apps Script directory does not include floor/zone mapping yet,
  * so filters primarily use departments present in directory data.
  */
 export const DEPARTMENT_LOCATIONS: Record<string, DeptLocation[]> = {}

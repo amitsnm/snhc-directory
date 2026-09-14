@@ -36,7 +36,8 @@ function mapLdapToEntry(row: LdapPersonPayload, index: number): DirectoryEntry {
 
 /**
  * Fetches directory from LDAP gateway API.
- * Falls back to local seed when unreachable so the UI always opens.
+ * When no real LDAP gateway is configured, uses the Apps Script–sourced seed
+ * so Intercom Directory stays populated offline-first.
  */
 export async function fetchFromLdap(
   config: AppConfig,
@@ -44,6 +45,21 @@ export async function fetchFromLdap(
 ): Promise<{ entries: DirectoryEntry[]; live: boolean }> {
   if (!navigator.onLine) {
     return { entries: [], live: false }
+  }
+
+  const ldapConfigured =
+    Boolean(import.meta.env.VITE_LDAP_URL) &&
+    !config.ldapUrl.includes('ldap.local')
+
+  if (!ldapConfigured) {
+    await delay(200, signal)
+    return {
+      entries: SEED_DIRECTORY.map((e) => ({
+        ...e,
+        updatedAt: new Date().toISOString(),
+      })),
+      live: true,
+    }
   }
 
   try {
@@ -67,18 +83,6 @@ export async function fetchFromLdap(
     const entries = rows.map(mapLdapToEntry)
     return { entries, live: true }
   } catch {
-    // Demo mode: simulate a successful shape when no LDAP gateway is configured.
-    // Real deployments replace this with a failure that keeps the cache.
-    if (import.meta.env.DEV && !import.meta.env.VITE_LDAP_URL) {
-      await delay(400, signal)
-      return {
-        entries: SEED_DIRECTORY.map((e) => ({
-          ...e,
-          updatedAt: new Date().toISOString(),
-        })),
-        live: true,
-      }
-    }
     return { entries: [], live: false }
   }
 }
