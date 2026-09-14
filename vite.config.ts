@@ -39,6 +39,8 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
+        // Tariff Master JSON is large and loaded on demand — do not fail the build.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         cleanupOutdatedCaches: true,
         runtimeCaching: [
           {
@@ -48,6 +50,14 @@ export default defineConfig({
               cacheName: 'directory-api',
               networkTimeoutSeconds: 4,
               expiration: { maxEntries: 32, maxAgeSeconds: 60 * 60 * 24 },
+            },
+          },
+          {
+            urlPattern: ({ url }) => url.pathname.startsWith('/data/'),
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'tariff-data',
+              expiration: { maxEntries: 4, maxAgeSeconds: 60 * 60 * 24 * 7 },
             },
           },
         ],

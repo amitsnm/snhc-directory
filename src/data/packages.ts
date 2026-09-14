@@ -20,7 +20,7 @@ export interface DemoPackage {
 
 /**
  * Demo-only packages for UI preview.
- * Not linked to Service Master / live hospital tariffs.
+ * Not linked to Tariff Master / live hospital tariffs.
  */
 export const DEMO_PACKAGES: DemoPackage[] = [
   {

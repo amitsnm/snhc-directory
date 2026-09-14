@@ -17,7 +17,7 @@ const HOME_CARD_META: Record<
   { icon: string; accent: string }
 > = {
   helpdesk: { icon: 'HD', accent: 'teal' },
-  'service-master': { icon: 'SM', accent: 'green' },
+  'tariff-master': { icon: 'TM', accent: 'green' },
   intercom: { icon: 'IC', accent: 'gold' },
   doctors: { icon: 'DR', accent: 'green' },
   speciality: { icon: 'SP', accent: 'teal' },

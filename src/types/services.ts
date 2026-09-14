@@ -1,4 +1,4 @@
-export interface ServiceMasterItem {
+export interface TariffMasterItem {
   tariff: string
   serviceType: string
   serviceItem: string
@@ -10,3 +10,6 @@ export interface ServiceMasterItem {
   subDepartment: string
   status: string
 }
+
+/** @deprecated Use TariffMasterItem */
+export type ServiceMasterItem = TariffMasterItem

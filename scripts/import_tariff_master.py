@@ -1,4 +1,4 @@
-"""Import full Service Master Excel — one row per tariff/billing line (no unique collapse)."""
+"""Import full Tariff Master Excel — one row per tariff/billing line."""
 from __future__ import annotations
 
 import json
@@ -6,8 +6,8 @@ from pathlib import Path
 
 import openpyxl
 
-XLSX = Path(r"C:\Users\IT\Downloads\DOC-20260831-WA0015.xlsx")
-OUT = Path(__file__).resolve().parents[1] / "src" / "data" / "service-master.json"
+XLSX = Path(r"C:\Users\IT\Downloads\Tariff_Master.xlsx")
+OUT = Path(__file__).resolve().parents[1] / "public" / "data" / "tariff-master.json"
 
 
 def main() -> None:
@@ -15,6 +15,7 @@ def main() -> None:
     ws = wb.active
     rows = ws.iter_rows(values_only=True)
     header = next(rows)
+    print("sheet", ws.title)
     print("header", header)
 
     out: list[dict] = []
@@ -38,7 +39,6 @@ def main() -> None:
         ) = (list(row) + [None] * 13)[:13]
         if not sitem:
             continue
-        price_num: float | int | None
         try:
             price_num = float(price) if price is not None and str(price).strip() != "" else None
             if price_num is not None and price_num == int(price_num):

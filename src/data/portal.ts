@@ -1,7 +1,7 @@
 export type PortalPage =
   | 'home'
   | 'helpdesk'
-  | 'service-master'
+  | 'tariff-master'
   | 'intercom'
   | 'doctors'
   | 'speciality'
@@ -21,10 +21,10 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
     blurb: 'Grievance & Feedback, Enquiry, and Complaint tickets with TAT, assignment, and escalation.',
   },
   {
-    id: 'service-master',
-    label: 'Service Master',
-    title: 'Service Master',
-    blurb: 'Full tariff catalogue with every billing category and price row from Service Master.',
+    id: 'tariff-master',
+    label: 'Tariff Master',
+    title: 'Tariff Master',
+    blurb: 'Full revised tariff catalogue with every billing category and price row.',
   },
   {
     id: 'intercom',

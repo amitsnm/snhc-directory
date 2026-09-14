@@ -4,9 +4,9 @@ import { PORTAL_NAV, type PortalPage } from './data/portal'
 import { DoctorsPage } from './pages/DoctorsPage'
 import { HomePage } from './pages/HomePage'
 import { IntercomPage } from './pages/IntercomPage'
-import { ServiceMasterPage } from './pages/ServiceMasterPage'
 import { PackagesPage } from './pages/PackagesPage'
 import { HelpdeskPage } from './pages/HelpdeskPage'
+import { TariffMasterPage } from './pages/TariffMasterPage'
 import { SpecialityPage } from './pages/SpecialityPage'
 import './App.css'
 
@@ -14,6 +14,7 @@ const PAGE_KEY = 'snhc-portal-page'
 
 function loadPage(): PortalPage {
   const saved = localStorage.getItem(PAGE_KEY)
+  if (saved === 'service-master') return 'tariff-master'
   if (PORTAL_NAV.some((item) => item.id === saved)) {
     return saved as PortalPage
   }
@@ -36,9 +37,9 @@ export default function App() {
       <div className={`app-frame${page === 'intercom' ? ' app-frame-flush' : ''}`}>
         {page === 'home' ? <HomePage onNavigate={onNavigate} /> : null}
         {page === 'helpdesk' ? <HelpdeskPage /> : null}
-        {page === 'service-master' ? <ServiceMasterPage /> : null}
+        {page === 'tariff-master' ? <TariffMasterPage /> : null}
         {page === 'intercom' ? <IntercomPage /> : null}
-    {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}
+        {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}
         {page === 'speciality' ? <SpecialityPage /> : null}
         {page === 'packages' ? <PackagesPage /> : null}
       </div>

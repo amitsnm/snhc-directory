@@ -1,40 +1,64 @@
-import { useMemo, useState } from 'react'
-import serviceMaster from '../data/service-master.json' with { type: 'json' }
-import type { ServiceMasterItem } from '../types/services'
+import { useEffect, useMemo, useState } from 'react'
+import type { TariffMasterItem } from '../types/services'
 
-const ALL = serviceMaster as ServiceMasterItem[]
+const TARIFF_URL = '/data/tariff-master.json'
 
 interface Props {
   title?: string
   presetTypes?: string[]
 }
 
-export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Props) {
+export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props) {
+  const [rows, setRows] = useState<TariffMasterItem[]>([])
+  const [loadState, setLoadState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [query, setQuery] = useState('')
   const [serviceType, setServiceType] = useState('')
   const [department, setDepartment] = useState('')
 
+  useEffect(() => {
+    let cancelled = false
+    ;(async () => {
+      try {
+        const res = await fetch(TARIFF_URL, { cache: 'force-cache' })
+        if (!res.ok) throw new Error(`HTTP ${res.status}`)
+        const data = (await res.json()) as TariffMasterItem[]
+        if (!cancelled) {
+          setRows(Array.isArray(data) ? data : [])
+          setLoadState('ready')
+        }
+      } catch {
+        if (!cancelled) {
+          setRows([])
+          setLoadState('error')
+        }
+      }
+    })()
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
   const types = useMemo(() => {
     const base = presetTypes?.length
       ? presetTypes
-      : [...new Set(ALL.map((r) => r.serviceType).filter(Boolean))].sort()
+      : [...new Set(rows.map((r) => r.serviceType).filter(Boolean))].sort()
     return base
-  }, [presetTypes])
+  }, [presetTypes, rows])
 
   const departments = useMemo(
     () =>
-      [...new Set(ALL.map((r) => r.department).filter(Boolean))]
+      [...new Set(rows.map((r) => r.department).filter(Boolean))]
         .filter((d) => {
           if (!presetTypes?.length) return true
-          return ALL.some((r) => r.department === d && presetTypes.includes(r.serviceType))
+          return rows.some((r) => r.department === d && presetTypes.includes(r.serviceType))
         })
         .sort(),
-    [presetTypes],
+    [presetTypes, rows],
   )
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return ALL.filter((row) => {
+    return rows.filter((row) => {
       if (presetTypes?.length && !presetTypes.includes(row.serviceType)) return false
       if (serviceType && row.serviceType !== serviceType) return false
       if (department && row.department !== department) return false
@@ -46,30 +70,31 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
       }
       return true
     })
-  }, [query, serviceType, department, presetTypes])
+  }, [rows, query, serviceType, department, presetTypes])
 
   const hasActiveSearch = query.trim().length >= 2 || Boolean(serviceType) || Boolean(department)
-  /** Unfiltered catalogue is huge — cap browse mode only; searches show every match. */
   const BROWSE_LIMIT = 1000
   const visible = hasActiveSearch ? filtered : filtered.slice(0, BROWSE_LIMIT)
   const totalMatching = filtered.length
 
   return (
-    <section className="portal-page service-master-page" aria-label={title}>
+    <section className="portal-page tariff-master-page" aria-label={title}>
       <div className="toolbar service-toolbar">
         <input
           type="search"
           className="toolbar-search"
-          placeholder="Search service, code, department…"
+          placeholder="Search item, code, department…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search services"
+          aria-label="Search tariff items"
+          disabled={loadState !== 'ready'}
         />
         <select
           className="toolbar-select toolbar-select-wide"
           value={serviceType}
           onChange={(e) => setServiceType(e.target.value)}
           aria-label="Service type"
+          disabled={loadState !== 'ready'}
         >
           <option value="">All types</option>
           {types.map((t) => (
@@ -83,6 +108,7 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
           aria-label="Department"
+          disabled={loadState !== 'ready'}
         >
           <option value="">All departments</option>
           {departments.map((d) => (
@@ -92,11 +118,17 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
           ))}
         </select>
         <p className="toolbar-count">
-          Showing <strong>{visible.length}</strong>
-          {totalMatching > visible.length ? ` of ${totalMatching}` : ''} services
-          {!hasActiveSearch && totalMatching > visible.length
-            ? ' — search or filter to see all matching rows'
-            : ''}
+          {loadState === 'loading'
+            ? 'Loading tariff master…'
+            : loadState === 'error'
+              ? 'Could not load tariff master'
+              : <>
+                  Showing <strong>{visible.length}</strong>
+                  {totalMatching > visible.length ? ` of ${totalMatching}` : ''} items
+                  {!hasActiveSearch && totalMatching > visible.length
+                    ? ' — search or filter to see all matching rows'
+                    : ''}
+                </>}
         </p>
       </div>
 
@@ -127,13 +159,22 @@ export function ServiceMasterPage({ title = 'Service Master', presetTypes }: Pro
             ))}
           </tbody>
         </table>
-        {visible.length === 0 ? (
+        {loadState === 'ready' && visible.length === 0 ? (
           <div className="empty-state">
-            <h2>No services found</h2>
+            <h2>No tariff items found</h2>
             <p>Try another search or clear the filters.</p>
+          </div>
+        ) : null}
+        {loadState === 'error' ? (
+          <div className="empty-state">
+            <h2>Tariff Master unavailable</h2>
+            <p>Refresh the page, or check that the tariff data file is deployed.</p>
           </div>
         ) : null}
       </div>
     </section>
   )
 }
+
+/** @deprecated Use TariffMasterPage */
+export const ServiceMasterPage = TariffMasterPage
