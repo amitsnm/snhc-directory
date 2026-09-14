@@ -184,13 +184,6 @@ select {
   line-height: 1.15;
 }
 
-.portal-kicker {
-  margin: 0 0 0.15rem;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--muted);
-}
-
 .portal-nav {
   border-top: 1px solid var(--line);
   background: #fff;
@@ -271,43 +264,143 @@ select {
 
 .home-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 0.85rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
 }
 
 .home-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-height: 210px;
   text-align: left;
-  padding: 1.15rem 1.2rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: #fff;
+  padding: 1.25rem 1.3rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: 18px;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(145deg, rgba(0, 87, 78, 0.18), rgba(181, 150, 102, 0.28)) border-box;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  isolation: isolate;
+  animation: home-card-in 0.45s ease both;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.home-card-glow {
+  position: absolute;
+  inset: auto -20% -40% auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 87, 78, 0.12), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.home-card-gold .home-card-glow {
+  background: radial-gradient(circle, rgba(181, 150, 102, 0.2), transparent 70%);
+}
+
+.home-card-teal .home-card-glow {
+  background: radial-gradient(circle, rgba(24, 103, 97, 0.16), transparent 70%);
 }
 
 .home-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--green-300);
-  box-shadow: 0 8px 20px rgba(0, 66, 57, 0.08);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 34px rgba(0, 66, 57, 0.12);
+}
+
+.home-card:hover .home-card-glow {
+  transform: scale(1.25) translate(-12%, -8%);
+  opacity: 1;
+}
+
+.home-card:hover .home-card-arrow {
+  transform: translateX(4px);
+}
+
+.home-card-icon {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(160deg, #0a6b62 0%, #004239 100%);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 18px rgba(0, 66, 57, 0.18);
+}
+
+.home-card-gold .home-card-icon {
+  background: linear-gradient(160deg, #c5a368 0%, #9a7d52 100%);
+  box-shadow: 0 8px 18px rgba(154, 125, 82, 0.22);
+}
+
+.home-card-teal .home-card-icon {
+  background: linear-gradient(160deg, #2f8f86 0%, #186761 100%);
+}
+
+.home-card-body {
+  position: relative;
+  z-index: 1;
+  flex: 1;
 }
 
 .home-card h3 {
   margin: 0;
-  font-size: 1.1rem;
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--green-900);
 }
 
 .home-card p {
-  margin: 0.4rem 0 0.85rem;
+  margin: 0.45rem 0 0;
   font-size: 0.92rem;
   color: var(--muted);
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .home-card-cta {
-  font-size: 0.85rem;
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  font-size: 0.88rem;
   font-weight: 700;
   color: var(--gold-deep);
+}
+
+.home-card-arrow {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+@keyframes home-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .service-toolbar {
@@ -327,31 +420,6 @@ select {
   font-weight: 700;
   color: var(--green-900);
   white-space: nowrap;
-}
-
-.speciality-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.75rem;
-}
-
-.speciality-card {
-  padding: 1rem 1.05rem;
-  background: #fff;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.speciality-card h3 {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--black);
-}
-
-.speciality-card p {
-  margin: 0.35rem 0 0;
-  font-size: 0.88rem;
-  color: var(--muted);
 }
 
 .header-stat {

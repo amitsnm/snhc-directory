@@ -1,0 +1,421 @@
+/* =====================================================
+   WRAPPER
+===================================================== */
+
+.spec-wrapper {
+  width: 100%;
+}
+
+/* =====================================================
+   FILTER ROW
+===================================================== */
+
+.spec-filter-row {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+/* =====================================================
+   FILTER BOX
+===================================================== */
+
+.spec-filter-box {
+  position: relative;
+  width: 300px;
+  max-width: 100%;
+}
+
+/* =====================================================
+   DROPDOWN
+===================================================== */
+
+.spec-filter-box select {
+  width: 100%;
+  height: 56px;
+  box-sizing: border-box;
+  padding: 0 100px 0 22px;
+  border: 1px solid #dedede;
+  border-radius: 28px;
+  background: #ffffff;
+  color: #005f55;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.spec-filter-box select:hover {
+  border-color: #b8d6d2;
+}
+
+.spec-filter-box select:focus {
+  border-color: #00675d;
+  box-shadow:
+    0 0 0 3px rgba(0, 103, 93, 0.08),
+    0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* =====================================================
+   CUSTOM DOWN ARROW
+===================================================== */
+
+.spec-filter-box::after {
+  content: '';
+  position: absolute;
+  right: 21px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid #00675d;
+  border-bottom: 2px solid #00675d;
+  transform: translateY(-70%) rotate(45deg);
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* =====================================================
+   DIVIDER BEFORE ARROW
+===================================================== */
+
+.spec-filter-box::before {
+  content: '';
+  position: absolute;
+  right: 51px;
+  top: 50%;
+  width: 1px;
+  height: 26px;
+  background: #e6e6e6;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 4;
+}
+
+/* =====================================================
+   CLEAR X
+===================================================== */
+
+.spec-filter-clear {
+  display: none;
+  position: absolute;
+  right: 61px;
+  top: 50%;
+  width: 30px !important;
+  height: 30px !important;
+  min-width: 30px !important;
+  min-height: 30px !important;
+  max-width: 30px !important;
+  max-height: 30px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: #fff0f0 !important;
+  color: #e53935 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box;
+  cursor: pointer;
+  transform: translateY(-50%);
+  z-index: 10;
+  box-shadow: none !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.spec-filter-clear.show {
+  display: flex !important;
+}
+
+.spec-filter-clear span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: inherit;
+  font-family: Arial, sans-serif;
+  font-size: 21px;
+  font-weight: 400;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
+.spec-filter-clear:hover,
+.spec-filter-clear:focus {
+  background: #e53935 !important;
+  color: #ffffff !important;
+  transform: translateY(-50%) scale(1.06);
+}
+
+/* =====================================================
+   SPECIALITIES GRID
+===================================================== */
+
+.spec-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.spec-card {
+  position: relative;
+  height: 285px;
+  min-height: 285px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 22px 20px 58px;
+  text-align: center;
+  background: linear-gradient(180deg, #138177 0%, #00655b 55%, #00554c 100%);
+  border-radius: 18px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.spec-card.card-active {
+  cursor: pointer;
+}
+
+.spec-card.card-active:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 30px rgba(0, 70, 62, 0.2);
+}
+
+.spec-card.card-inactive {
+  cursor: default;
+}
+
+/* =====================================================
+   ICON
+===================================================== */
+
+.spec-icon {
+  width: 82px;
+  height: 82px;
+  min-width: 82px;
+  flex: 0 0 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 17px;
+  border-radius: 50%;
+  background: #f5e8d5;
+}
+
+.spec-icon img {
+  width: 49px;
+  height: 49px;
+  display: block;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.spec-card.card-active:hover .spec-icon img {
+  transform: scale(1.06);
+}
+
+/* =====================================================
+   CARD TITLE
+===================================================== */
+
+.spec-card h3 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  color: #ffffff !important;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.25;
+  text-align: center;
+}
+
+.spec-card:hover h3 {
+  color: #ffffff !important;
+}
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.spec-card p {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: 95%;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: center;
+}
+
+/* =====================================================
+   KNOW MORE BUTTON
+===================================================== */
+
+.spec-btn,
+.spec-btn:link,
+.spec-btn:visited {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 130px;
+  height: 45px;
+  box-sizing: border-box;
+  padding: 0 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none !important;
+  border-radius: 24px 0 0 0;
+  background: #c5a368 !important;
+  color: #ffffff !important;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 5;
+  transition: background-color 0.25s ease;
+}
+
+.spec-btn:hover,
+.spec-btn:focus,
+.spec-btn:active,
+.spec-card:hover .spec-btn {
+  background: #b69156 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.spec-card.card-inactive .spec-btn {
+  display: none !important;
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1024px) {
+  .spec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 767px) {
+  .spec-filter-row {
+    width: 100%;
+    justify-content: stretch;
+    margin-bottom: 24px;
+  }
+
+  .spec-filter-box {
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .spec-filter-box select {
+    width: 100% !important;
+    height: 52px;
+    padding: 0 100px 0 20px;
+    border-radius: 26px;
+    font-size: 15px;
+  }
+
+  .spec-filter-box::after {
+    right: 21px;
+  }
+
+  .spec-filter-box::before {
+    right: 51px;
+    height: 24px;
+  }
+
+  .spec-filter-clear {
+    right: 61px;
+    width: 30px !important;
+    height: 30px !important;
+    min-width: 30px !important;
+    min-height: 30px !important;
+  }
+
+  .spec-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .spec-card {
+    height: 270px;
+    min-height: 270px;
+    padding: 20px 18px 56px;
+  }
+
+  .spec-icon {
+    width: 76px;
+    height: 76px;
+    min-width: 76px;
+    flex-basis: 76px;
+    margin-bottom: 15px;
+  }
+
+  .spec-icon img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .spec-card h3 {
+    font-size: 19px;
+  }
+
+  .spec-card p {
+    font-size: 14px;
+  }
+}
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+  .spec-filter-box {
+    width: 100% !important;
+  }
+
+  .spec-filter-box select {
+    width: 100% !important;
+  }
+
+  .spec-card {
+    height: 260px;
+    min-height: 260px;
+    border-radius: 16px;
+  }
+}

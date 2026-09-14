@@ -22,7 +22,6 @@ export function HeaderBar({ activePage, onNavigate }: Props) {
         </a>
 
         <div className="header-center">
-          <p className="portal-kicker">Sant Nirankari Health City</p>
           <h1 className="brand-title">Internal Portal</h1>
         </div>
       </div>

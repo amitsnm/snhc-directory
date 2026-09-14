@@ -29,18 +29,18 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
     id: 'doctors',
     label: 'Doctors',
     title: 'Doctors',
-    blurb: 'Find doctors by name, speciality, symptom, or treatment — with profile and appointment links.',
+    blurb: 'Find doctors by name, speciality, symptom, or treatment — photos from the hospital site, kept in-portal.',
   },
   {
     id: 'speciality',
     label: 'Speciality',
     title: 'Speciality',
-    blurb: 'Departments and specialities available across the hospital.',
+    blurb: 'Browse hospital specialities with icons, short descriptions, and links to know more.',
   },
   {
     id: 'packages',
     label: 'Packages',
     title: 'Packages',
-    blurb: 'IP packages, OP packages, and care plans from the tariff master.',
+    blurb: 'Demo packages only — Preventive Health Checkup, Eye Care, Heart Care, and more (dummy data).',
   },
 ]

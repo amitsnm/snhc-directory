@@ -5,6 +5,7 @@ import { DoctorsPage } from './pages/DoctorsPage'
 import { HomePage } from './pages/HomePage'
 import { IntercomPage } from './pages/IntercomPage'
 import { ServiceMasterPage } from './pages/ServiceMasterPage'
+import { PackagesPage } from './pages/PackagesPage'
 import { SpecialityPage } from './pages/SpecialityPage'
 import './App.css'
 
@@ -37,9 +38,7 @@ export default function App() {
         {page === 'intercom' ? <IntercomPage /> : null}
     {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}
         {page === 'speciality' ? <SpecialityPage /> : null}
-        {page === 'packages' ? (
-          <ServiceMasterPage title="Packages" presetTypes={['IP Package', 'OP Package', 'Care Plan']} />
-        ) : null}
+        {page === 'packages' ? <PackagesPage /> : null}
       </div>
     </div>
   )

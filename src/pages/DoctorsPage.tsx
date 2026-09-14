@@ -6,7 +6,6 @@ import {
   DOCTORS,
   FALLBACK_DOCTOR_IMAGE,
   SPECIALITY_PRIORITY,
-  doctorProfileUrl,
   type Doctor,
 } from '../data/doctors'
 import './DoctorsPage.css'
@@ -217,31 +216,8 @@ function highlightSuggestion(value: string, query: string): string {
 }
 
 function DoctorCard({ doctor }: { doctor: Doctor }) {
-  const [imageSrc, setImageSrc] = useState(FALLBACK_DOCTOR_IMAGE)
+  const [imageSrc, setImageSrc] = useState(doctor.photoUrl || FALLBACK_DOCTOR_IMAGE)
   const bookable = canBookAppointment(doctor)
-
-  useEffect(() => {
-    let cancelled = false
-    ;(async () => {
-      try {
-        // Prefer website og:image when available; CORS may block on Vercel — fallback stays.
-        const res = await fetch(doctorProfileUrl(doctor), { mode: 'cors' })
-        if (!res.ok) return
-        const html = await res.text()
-        const match = html.match(/property=["']og:image["']\s+content=["']([^"']+)["']/i)
-          || html.match(/content=["']([^"']+)["']\s+property=["']og:image["']/i)
-        const url = match?.[1]
-        if (url && url.includes('nirankarihealthcity.org') && !cancelled) {
-          setImageSrc(url)
-        }
-      } catch {
-        // keep fallback
-      }
-    })()
-    return () => {
-      cancelled = true
-    }
-  }, [doctor])
 
   return (
     <article className="doctor-profile-card">
@@ -252,10 +228,8 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
             src={imageSrc}
             alt={doctor.name}
             loading="lazy"
-            onError={(e) => {
-              e.currentTarget.onerror = null
-              e.currentTarget.src = FALLBACK_DOCTOR_IMAGE
-            }}
+            referrerPolicy="no-referrer"
+            onError={() => setImageSrc(FALLBACK_DOCTOR_IMAGE)}
           />
         </div>
         <div className="doctor-card-heading">
@@ -283,16 +257,8 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
         </div>
       ) : null}
 
-      <div className={`doctor-card-actions${bookable ? '' : ' single-button'}`}>
-        <a
-          href={doctorProfileUrl(doctor)}
-          className="doctor-card-button doctor-card-profile-button"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          View Full Profile
-        </a>
-        {bookable ? (
+      {bookable ? (
+        <div className="doctor-card-actions single-button">
           <a
             href={APPOINTMENT_URL}
             className="doctor-card-button doctor-card-appointment-button"
@@ -301,8 +267,8 @@ function DoctorCard({ doctor }: { doctor: Doctor }) {
           >
             Book An Appointment
           </a>
-        ) : null}
-      </div>
+        </div>
+      ) : null}
     </article>
   )
 }
