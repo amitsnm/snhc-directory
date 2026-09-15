@@ -128,7 +128,22 @@ export const HELPDESK_CONTACTS = [
 ] as const
 
 /** Seed from hospital Apps Script Extension Directory — offline-first */
-export const SEED_DIRECTORY: DirectoryEntry[] = snhcDirectory as DirectoryEntry[]
+export const SEED_DIRECTORY: DirectoryEntry[] = (snhcDirectory as Array<Partial<DirectoryEntry>>).map(
+  (row, index) => ({
+    id: row.id ?? `seed-${index + 1}`,
+    person: row.person ?? 'Unknown',
+    designation: row.designation ?? '—',
+    department: row.department ?? '—',
+    floor: row.floor ?? '—',
+    zone: row.zone ?? '—',
+    email: row.email ?? '',
+    mobile: row.mobile ?? '',
+    extension: row.extension ?? '',
+    status: row.status === 'inactive' ? 'inactive' : 'active',
+    ldapDn: row.ldapDn,
+    updatedAt: row.updatedAt ?? '2026-09-05T00:00:00.000Z',
+  }),
+)
 
 /** Public Apps Script web app used as the live directory source of truth. */
 export const APPS_SCRIPT_DIRECTORY_URL =

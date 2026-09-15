@@ -23,6 +23,7 @@ const HOME_CARD_META: Record<
   doctors: { icon: 'DR', accent: 'green' },
   speciality: { icon: 'SP', accent: 'teal' },
   packages: { icon: 'PK', accent: 'gold' },
+  admin: { icon: 'AD', accent: 'teal' },
 }
 
 export function HomePage({ onNavigate }: Props) {

@@ -2,16 +2,20 @@ export type ConnectionState = 'online' | 'offline' | 'syncing' | 'error'
 
 export type ViewMode = 'list' | 'grid' | 'floor' | 'department'
 
+export type DirectoryStatus = 'active' | 'inactive'
+
 export interface DirectoryEntry {
   id: string
   person: string
   designation: string
   department: string
   floor: string
+  /** Section / zone within floor */
   zone: string
   email: string
   mobile: string
   extension: string
+  status: DirectoryStatus
   ldapDn?: string
   updatedAt: string
 }
@@ -28,7 +32,7 @@ export interface SyncStatus {
   ldap: ConnectionState
   ipbx: ConnectionState
   lastSyncedAt: string | null
-  source: 'live' | 'cache'
+  source: 'live' | 'cache' | 'admin'
   entryCount: number
 }
 
@@ -39,3 +43,16 @@ export interface AppConfig {
   ipbxApiKey: string
   syncIntervalMs: number
 }
+
+/** Excel / CSV column headers for Contact Center bulk import */
+export const DIRECTORY_IMPORT_HEADERS = [
+  'Name',
+  'Designation',
+  'Department',
+  'Section',
+  'Floor',
+  'Intercom',
+  'Mobile',
+  'Email',
+  'Status',
+] as const

@@ -1,15 +1,15 @@
 import { useMemo, useState } from 'react'
 import { compareFloors, formatFloorLabel } from '../data/locations'
-import { copyText } from '../services/ipbx'
-import type { DirectoryEntry, ViewMode } from '../types/directory'
+import { copyText, dialExtension, formatContactCard } from '../services/ipbx'
+import type { AppConfig, DirectoryEntry, ViewMode } from '../types/directory'
 
 interface Props {
   entries: DirectoryEntry[]
-  config: unknown
+  config: AppConfig
   viewMode: ViewMode
 }
 
-export function DirectoryTable({ entries, viewMode }: Props) {
+export function DirectoryTable({ entries, config, viewMode }: Props) {
   const [toast, setToast] = useState<string | null>(null)
 
   const notify = (message: string) => {
@@ -17,13 +17,39 @@ export function DirectoryTable({ entries, viewMode }: Props) {
     window.setTimeout(() => setToast(null), 2400)
   }
 
-  // Dial / Copy contact actions temporarily disabled
-  // const onDial = async (entry: DirectoryEntry) => { ... }
-  // const onCopyCard = async (entry: DirectoryEntry) => { ... }
+  const onDialExt = async (entry: DirectoryEntry) => {
+    notify((await dialExtension(entry, config)).message)
+  }
+
+  const onCallMobile = (entry: DirectoryEntry) => {
+    const mobile = entry.mobile?.trim()
+    if (!mobile) {
+      notify('No mobile number')
+      return
+    }
+    window.location.href = `tel:${mobile}`
+    notify(`Calling ${entry.person}`)
+  }
+
+  const onEmail = (entry: DirectoryEntry) => {
+    const email = entry.email?.trim()
+    if (!email) {
+      notify('No email address')
+      return
+    }
+    window.location.href = `mailto:${email}`
+    notify(`Opening email to ${entry.person}`)
+  }
 
   const onCopyExt = async (entry: DirectoryEntry) => {
-    notify((await copyText('Extension', entry.extension)).message)
+    notify((await copyText('Intercom', entry.extension)).message)
   }
+
+  const onCopyCard = async (entry: DirectoryEntry) => {
+    notify((await copyText('Contact card', formatContactCard(entry))).message)
+  }
+
+  const actions = { onDialExt, onCallMobile, onEmail, onCopyExt, onCopyCard }
 
   const groups = useMemo(() => {
     if (viewMode === 'list' || viewMode === 'grid') return null
@@ -57,11 +83,11 @@ export function DirectoryTable({ entries, viewMode }: Props) {
   return (
     <>
       {viewMode === 'list' ? (
-        <ListView entries={entries} onCopyExt={onCopyExt} />
+        <ListView entries={entries} {...actions} />
       ) : viewMode === 'grid' ? (
-        <GridView entries={entries} onCopyExt={onCopyExt} />
+        <GridView entries={entries} {...actions} />
       ) : (
-        <GroupedView groups={groups ?? []} mode={viewMode} onCopyExt={onCopyExt} />
+        <GroupedView groups={groups ?? []} mode={viewMode} {...actions} />
       )}
 
       {toast ? (
@@ -74,7 +100,11 @@ export function DirectoryTable({ entries, viewMode }: Props) {
 }
 
 type Actions = {
+  onDialExt: (e: DirectoryEntry) => void | Promise<void>
+  onCallMobile: (e: DirectoryEntry) => void
+  onEmail: (e: DirectoryEntry) => void
   onCopyExt: (e: DirectoryEntry) => void | Promise<void>
+  onCopyCard: (e: DirectoryEntry) => void | Promise<void>
 }
 
 function toSentenceCase(value: string): string {
@@ -84,37 +114,80 @@ function toSentenceCase(value: string): string {
   return lower.charAt(0).toUpperCase() + lower.slice(1)
 }
 
-function ListView({ entries, onCopyExt }: { entries: DirectoryEntry[] } & Actions) {
+function ActionIcons({ entry, onDialExt, onCallMobile, onEmail, onCopyCard }: { entry: DirectoryEntry } & Actions) {
   return (
-    <div className="list-view" aria-label="List view">
-      <div className="list-head">
+    <div className="contact-actions">
+      <button
+        type="button"
+        className="contact-action"
+        title="Dial intercom"
+        disabled={!entry.extension}
+        onClick={() => void onDialExt(entry)}
+      >
+        ⌕
+      </button>
+      <button
+        type="button"
+        className="contact-action"
+        title="Call mobile"
+        disabled={!entry.mobile}
+        onClick={() => onCallMobile(entry)}
+      >
+        ☎
+      </button>
+      <button
+        type="button"
+        className="contact-action"
+        title="Send email"
+        disabled={!entry.email}
+        onClick={() => onEmail(entry)}
+      >
+        ✉
+      </button>
+      <button type="button" className="contact-action" title="Copy contact card" onClick={() => void onCopyCard(entry)}>
+        ⎘
+      </button>
+    </div>
+  )
+}
+
+function ListView({ entries, ...actions }: { entries: DirectoryEntry[] } & Actions) {
+  return (
+    <div className="list-view list-view-wide" aria-label="List view">
+      <div className="list-head list-head-wide">
         <span>Name</span>
+        <span>Designation</span>
         <span>Department</span>
+        <span>Section</span>
         <span>Floor</span>
-        <span>Zone</span>
-        <span>Ext</span>
-        {/* <span>Dial</span> */}
-        {/* <span>Copy</span> */}
+        <span>Intercom</span>
+        <span>Mobile</span>
+        <span>Email</span>
+        <span>Actions</span>
       </div>
       <ul className="list-body">
         {entries.map((entry) => (
-          <li key={entry.id} className="list-row">
+          <li key={entry.id} className="list-row list-row-wide">
             <div className="list-name">
               <strong>{entry.person}</strong>
-              {entry.designation && entry.designation !== 'Staff' ? (
-                <span>{entry.designation}</span>
-              ) : null}
             </div>
+            <span className="list-desig">{entry.designation || '—'}</span>
             <span className="list-dept">{entry.department}</span>
-            <span className="list-floor">{formatFloorLabel(entry.floor)}</span>
             <span className="list-zone">{entry.zone || '—'}</span>
-            <button type="button" className="list-ext" onClick={() => void onCopyExt(entry)} title="Copy extension">
-              {entry.extension}
+            <span className="list-floor">{formatFloorLabel(entry.floor)}</span>
+            <button
+              type="button"
+              className="list-ext"
+              onClick={() => void actions.onCopyExt(entry)}
+              title="Copy intercom"
+            >
+              {entry.extension || '—'}
             </button>
-            {/* Dial / Copy buttons commented out
-            <button type="button" className="btn-primary list-dial">Dial</button>
-            <button type="button" className="btn-secondary list-copy">Copy</button>
-            */}
+            <span className="list-mobile">{entry.mobile || '—'}</span>
+            <span className="list-email" title={entry.email || undefined}>
+              {entry.email || '—'}
+            </span>
+            <ActionIcons entry={entry} {...actions} />
           </li>
         ))}
       </ul>
@@ -122,24 +195,33 @@ function ListView({ entries, onCopyExt }: { entries: DirectoryEntry[] } & Action
   )
 }
 
-function GridView({ entries, onCopyExt }: { entries: DirectoryEntry[] } & Actions) {
+function GridView({ entries, ...actions }: { entries: DirectoryEntry[] } & Actions) {
   return (
     <div className="grid-view" aria-label="Grid view">
       {entries.map((entry) => (
         <article key={entry.id} className="grid-card">
           <header className="grid-card-top">
             <h2>{entry.person}</h2>
-            <button type="button" className="extn-num" onClick={() => void onCopyExt(entry)} title="Copy extension">
+            <button
+              type="button"
+              className="extn-num"
+              onClick={() => void actions.onCopyExt(entry)}
+              title="Copy intercom"
+            >
               {entry.extension}
             </button>
           </header>
           <p className="grid-dept">{toSentenceCase(entry.department)}</p>
           <p className="grid-meta">
+            {entry.designation && entry.designation !== 'Staff' ? `${entry.designation} · ` : ''}
             {formatFloorLabel(entry.floor)}
             {entry.zone ? ` · ${entry.zone}` : ''}
-            {entry.designation && entry.designation !== 'Staff' ? ` · ${entry.designation}` : ''}
           </p>
-          {/* Dial / Copy actions commented out */}
+          <p className="grid-meta">
+            {entry.mobile ? `Mobile ${entry.mobile}` : 'No mobile'}
+            {entry.email ? ` · ${entry.email}` : ''}
+          </p>
+          <ActionIcons entry={entry} {...actions} />
         </article>
       ))}
     </div>
@@ -149,7 +231,7 @@ function GridView({ entries, onCopyExt }: { entries: DirectoryEntry[] } & Action
 function GroupedView({
   groups,
   mode,
-  onCopyExt,
+  ...actions
 }: {
   groups: [string, DirectoryEntry[]][]
   mode: ViewMode
@@ -164,22 +246,26 @@ function GroupedView({
           </h2>
           <ul className="extn-rows">
             {people.map((entry) => (
-              <li key={entry.id} className="extn-row">
+              <li key={entry.id} className="extn-row extn-row-rich">
                 <div className="extn-name-block">
                   <span className="extn-name">{entry.person}</span>
-                  {mode === 'floor' ? (
-                    <span className="extn-loc">{entry.department}</span>
-                  ) : (
-                    <span className="extn-loc">
-                      {formatFloorLabel(entry.floor)}
-                      {entry.zone ? ` · ${entry.zone}` : ''}
-                    </span>
-                  )}
+                  <span className="extn-loc">
+                    {entry.designation && entry.designation !== 'Staff' ? `${entry.designation} · ` : ''}
+                    {mode === 'floor'
+                      ? entry.department
+                      : `${formatFloorLabel(entry.floor)}${entry.zone ? ` · ${entry.zone}` : ''}`}
+                    {entry.mobile ? ` · ${entry.mobile}` : ''}
+                  </span>
                 </div>
-                <button type="button" className="extn-num" onClick={() => void onCopyExt(entry)} title="Copy extension">
+                <button
+                  type="button"
+                  className="extn-num"
+                  onClick={() => void actions.onCopyExt(entry)}
+                  title="Copy intercom"
+                >
                   {entry.extension}
                 </button>
-                {/* Dial / Copy actions commented out */}
+                <ActionIcons entry={entry} {...actions} />
               </li>
             ))}
           </ul>

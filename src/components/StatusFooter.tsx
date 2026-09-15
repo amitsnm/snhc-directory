@@ -52,7 +52,11 @@ export function StatusFooter({ status, onRefresh }: Props) {
             <span className="conn-label">Contacts :</span>
             <span className="header-stat-value">
               {status.entryCount}
-              {status.source === 'cache' ? ' · Cached' : ' · Live'}
+              {status.source === 'admin'
+                ? ' · Admin'
+                : status.source === 'cache'
+                  ? ' · Cached'
+                  : ' · Live'}
             </span>
           </span>
           <span className="header-stat">

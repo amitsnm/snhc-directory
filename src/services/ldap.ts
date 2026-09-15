@@ -29,6 +29,7 @@ function mapLdapToEntry(row: LdapPersonPayload, index: number): DirectoryEntry {
     email: row.mail ?? '',
     mobile: row.mobile ?? row.telephoneNumber ?? '',
     extension: row.extensionAttribute1 ?? row.telephoneNumber ?? '',
+    status: 'active',
     ldapDn: row.dn,
     updatedAt: row.whenChanged ?? new Date().toISOString(),
   }

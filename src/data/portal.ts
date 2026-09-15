@@ -7,6 +7,7 @@ export type PortalPage =
   | 'doctors'
   | 'speciality'
   | 'packages'
+  | 'admin'
 
 export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: string }[] = [
   {
@@ -37,7 +38,7 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
     id: 'intercom',
     label: 'Intercom Directory',
     title: 'Intercom Directory',
-    blurb: 'Extension numbers from the hospital Apps Script directory (Management + Departments & Staff).',
+    blurb: 'Name, designation, department, section, floor, intercom, mobile, and email — with dial and mail actions.',
   },
   {
     id: 'doctors',
@@ -56,5 +57,11 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
     label: 'Packages',
     title: 'Packages',
     blurb: 'Demo packages only — Preventive Health Checkup, Eye Care, Heart Care, and more (dummy data).',
+  },
+  {
+    id: 'admin',
+    label: 'Admin',
+    title: 'Admin',
+    blurb: 'Add, update, activate/deactivate contacts, and bulk-import the Contact Center Excel/CSV template.',
   },
 ]

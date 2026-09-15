@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { HeaderBar } from './components/HeaderBar'
 import { PORTAL_NAV, type PortalPage } from './data/portal'
+import { AdminPage } from './pages/AdminPage'
 import { DoctorsPage } from './pages/DoctorsPage'
 import { EmergencyPage } from './pages/EmergencyPage'
 import { HomePage } from './pages/HomePage'
@@ -44,6 +45,7 @@ export default function App() {
         {page === 'doctors' ? <DoctorsPage onNavigate={onNavigate} /> : null}
         {page === 'speciality' ? <SpecialityPage /> : null}
         {page === 'packages' ? <PackagesPage /> : null}
+        {page === 'admin' ? <AdminPage /> : null}
       </div>
     </div>
   )

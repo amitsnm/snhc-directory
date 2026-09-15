@@ -1135,6 +1135,70 @@ select {
   white-space: nowrap;
 }
 
+.list-head-wide,
+.list-row-wide {
+  grid-template-columns:
+    minmax(140px, 1.2fr)
+    minmax(110px, 0.9fr)
+    minmax(130px, 1fr)
+    minmax(90px, 0.7fr)
+    minmax(80px, 0.6fr)
+    80px
+    minmax(110px, 0.8fr)
+    minmax(140px, 1fr)
+    120px;
+  min-width: 1100px;
+}
+
+.list-desig,
+.list-mobile,
+.list-email {
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.contact-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.contact-action {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--green-900);
+  font-size: 0.95rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.contact-action:hover:not(:disabled) {
+  border-color: var(--green-600);
+  background: #f3faf8;
+}
+
+.contact-action:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.extn-row-rich {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.grid-card .contact-actions {
+  margin-top: 0.65rem;
+}
+
 .list-dept {
   font-size: 0.95rem;
   color: var(--ink-soft);

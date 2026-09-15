@@ -14,6 +14,7 @@ export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props
   const [query, setQuery] = useState('')
   const [serviceType, setServiceType] = useState('')
   const [department, setDepartment] = useState('')
+  const [billing, setBilling] = useState('')
 
   useEffect(() => {
     let cancelled = false
@@ -56,12 +57,37 @@ export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props
     [presetTypes, rows],
   )
 
+  /** Billing options from rows matching current search / type / department (before billing filter). */
+  const billingCategories = useMemo(() => {
+    const q = query.trim().toLowerCase()
+    const pool = rows.filter((row) => {
+      if (presetTypes?.length && !presetTypes.includes(row.serviceType)) return false
+      if (serviceType && row.serviceType !== serviceType) return false
+      if (department && row.department !== department) return false
+      if (q.length >= 2) {
+        const hay = [row.serviceItem, row.code, row.department, row.serviceType]
+          .join(' ')
+          .toLowerCase()
+        if (!hay.includes(q)) return false
+      }
+      return Boolean(row.billingCategory)
+    })
+    return [...new Set(pool.map((r) => r.billingCategory))].sort((a, b) => a.localeCompare(b))
+  }, [rows, query, serviceType, department, presetTypes])
+
+  useEffect(() => {
+    if (billing && !billingCategories.includes(billing)) {
+      setBilling('')
+    }
+  }, [billing, billingCategories])
+
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
     return rows.filter((row) => {
       if (presetTypes?.length && !presetTypes.includes(row.serviceType)) return false
       if (serviceType && row.serviceType !== serviceType) return false
       if (department && row.department !== department) return false
+      if (billing && row.billingCategory !== billing) return false
       if (q.length >= 2) {
         const hay = [row.serviceItem, row.code, row.department, row.serviceType, row.billingCategory]
           .join(' ')
@@ -70,9 +96,10 @@ export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props
       }
       return true
     })
-  }, [rows, query, serviceType, department, presetTypes])
+  }, [rows, query, serviceType, department, billing, presetTypes])
 
-  const hasActiveSearch = query.trim().length >= 2 || Boolean(serviceType) || Boolean(department)
+  const hasActiveSearch =
+    query.trim().length >= 2 || Boolean(serviceType) || Boolean(department) || Boolean(billing)
   const BROWSE_LIMIT = 1000
   const visible = hasActiveSearch ? filtered : filtered.slice(0, BROWSE_LIMIT)
   const totalMatching = filtered.length
@@ -114,6 +141,20 @@ export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props
           {departments.map((d) => (
             <option key={d} value={d}>
               {d}
+            </option>
+          ))}
+        </select>
+        <select
+          className="toolbar-select toolbar-select-wide"
+          value={billing}
+          onChange={(e) => setBilling(e.target.value)}
+          aria-label="Billing category"
+          disabled={loadState !== 'ready'}
+        >
+          <option value="">All billing</option>
+          {billingCategories.map((b) => (
+            <option key={b} value={b}>
+              {b}
             </option>
           ))}
         </select>

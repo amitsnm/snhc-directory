@@ -77,7 +77,7 @@ export function formatContactCard(entry: DirectoryEntry): string {
     entry.person,
     entry.designation,
     entry.department,
-    `Floor: ${formatFloorLabel(entry.floor)} · Zone: ${entry.zone}`,
+    `Floor: ${formatFloorLabel(entry.floor)} · Section: ${entry.zone}`,
     entry.email ? `Email: ${entry.email}` : null,
     entry.mobile ? `Mobile: ${entry.mobile}` : null,
     entry.extension ? `Ext: ${entry.extension}` : null,

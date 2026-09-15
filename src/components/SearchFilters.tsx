@@ -79,10 +79,10 @@ export function SearchFilters({
           className="toolbar-select"
           value={filters.zone}
           onChange={(e) => onChange('zone', e.target.value)}
-          aria-label="Zone"
-          title="Zone"
+          aria-label="Section"
+          title="Section"
         >
-          <option value="">Zone</option>
+          <option value="">Section</option>
           {options.zones.map((opt) => (
             <option key={opt} value={opt}>
               {opt}
