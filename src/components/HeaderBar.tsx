@@ -22,7 +22,7 @@ export function HeaderBar({ activePage, onNavigate }: Props) {
         </a>
 
         <div className="header-center">
-          <h1 className="brand-title">Internal Portal</h1>
+          <h1 className="brand-title">Contact Center</h1>
         </div>
       </div>
 

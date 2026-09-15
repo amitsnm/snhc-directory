@@ -1,5 +1,6 @@
 export type PortalPage =
   | 'home'
+  | 'emergency'
   | 'helpdesk'
   | 'tariff-master'
   | 'intercom'
@@ -11,8 +12,14 @@ export const PORTAL_NAV: { id: PortalPage; label: string; title: string; blurb: 
   {
     id: 'home',
     label: 'Home',
-    title: 'Internal Portal',
-    blurb: 'Sant Nirankari Health City staff portal for services, directory, and clinical references.',
+    title: 'Contact Center',
+    blurb: 'Sant Nirankari Health City contact center for emergency codes, directory, and clinical references.',
+  },
+  {
+    id: 'emergency',
+    label: 'Emergency Codes',
+    title: 'Emergency Codes',
+    blurb: 'Official clinical and administrative emergency telephone codes plus quick dial desks.',
   },
   {
     id: 'helpdesk',

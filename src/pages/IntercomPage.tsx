@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { DirectoryTable } from '../components/DirectoryTable'
 import { SearchFilters } from '../components/SearchFilters'
-import { ServiceBanners } from '../components/ServiceBanners'
 import { StatusFooter } from '../components/StatusFooter'
 import { useDirectory } from '../hooks/useDirectory'
 import type { ViewMode } from '../types/directory'
@@ -39,7 +38,6 @@ export function IntercomPage() {
 
   return (
     <section className="portal-page intercom-page" aria-label="Intercom Directory">
-      <ServiceBanners />
       <div className="app-frame intercom-frame">
         <SearchFilters
           filters={filters}

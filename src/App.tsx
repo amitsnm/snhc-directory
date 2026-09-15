@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { HeaderBar } from './components/HeaderBar'
 import { PORTAL_NAV, type PortalPage } from './data/portal'
 import { DoctorsPage } from './pages/DoctorsPage'
+import { EmergencyPage } from './pages/EmergencyPage'
 import { HomePage } from './pages/HomePage'
 import { IntercomPage } from './pages/IntercomPage'
 import { PackagesPage } from './pages/PackagesPage'
@@ -36,6 +37,7 @@ export default function App() {
       <HeaderBar activePage={page} onNavigate={onNavigate} />
       <div className={`app-frame${page === 'intercom' ? ' app-frame-flush' : ''}`}>
         {page === 'home' ? <HomePage onNavigate={onNavigate} /> : null}
+        {page === 'emergency' ? <EmergencyPage /> : null}
         {page === 'helpdesk' ? <HelpdeskPage /> : null}
         {page === 'tariff-master' ? <TariffMasterPage /> : null}
         {page === 'intercom' ? <IntercomPage /> : null}

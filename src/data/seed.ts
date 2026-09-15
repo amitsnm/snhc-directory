@@ -12,27 +12,113 @@ export const DEFAULT_CONFIG: AppConfig = {
 /** Header strip — SNHC Extension Directory (Apps Script, as on 05-Sep-2026) */
 export const COMPLEX_META = {
   asOn: '05-Sep-2026',
-  reception: '1100, 1500',
+  reception: '1500',
   epabx: '',
   fax: '',
 } as const
 
-/** Hospital emergency codes — demo extensions (4-digit) */
-export const EMERGENCY_CODES = [
-  { id: 'blue', name: 'Blue', meaning: 'Cardiac / respiratory arrest', extension: '2222', color: '#1565c0' },
-  { id: 'red', name: 'Red', meaning: 'Fire', extension: '3333', color: '#c62828' },
-  { id: 'pink', name: 'Pink', meaning: 'Infant / child abduction', extension: '4444', color: '#ad1457' },
-  { id: 'orange', name: 'Orange', meaning: 'Hazardous materials / decontamination', extension: '5555', color: '#ef6c00' },
-  { id: 'yellow', name: 'Yellow', meaning: 'Missing patient / facility alert', extension: '6666', color: '#c79100' },
-  { id: 'black', name: 'Black', meaning: 'Bomb threat / severe weather', extension: '7777', color: '#2a2a2a' },
-  { id: 'purple', name: 'Purple', meaning: 'Security / hostage situation', extension: '8888', color: '#6a1b9a' },
-  { id: 'silver', name: 'Silver', meaning: 'Active shooter / weapon', extension: '9999', color: '#607d8b' },
-] as const
+export type EmergencyCodeKind = 'clinical' | 'admin'
 
-/** Quick dial / helpdesk — from Apps Script Extension Directory */
+export interface EmergencyCode {
+  id: string
+  name: string
+  meaning: string
+  extension: string
+  color: string
+  kind: EmergencyCodeKind
+}
+
+/**
+ * Official SNHC emergency telephone codes from CODES Circular
+ * (Clinical + Non-Clinical / Administrative collective response).
+ */
+export const EMERGENCY_CODES: EmergencyCode[] = [
+  {
+    id: 'blue',
+    name: 'Blue',
+    meaning: 'CPR – Adult / Pediatric / Neonate',
+    extension: '5000',
+    color: '#1565c0',
+    kind: 'clinical',
+  },
+  {
+    id: 'indigo',
+    name: 'Indigo',
+    meaning: 'STEMI',
+    extension: '5111',
+    color: '#3949ab',
+    kind: 'clinical',
+  },
+  {
+    id: 'grey',
+    name: 'Grey',
+    meaning: 'Stroke',
+    extension: '5222',
+    color: '#616161',
+    kind: 'clinical',
+  },
+  {
+    id: 'orange',
+    name: 'Orange',
+    meaning: 'Poly-Trauma',
+    extension: '5333',
+    color: '#ef6c00',
+    kind: 'clinical',
+  },
+  {
+    id: 'yellow',
+    name: 'Yellow',
+    meaning: 'Disaster',
+    extension: '5444',
+    color: '#c79100',
+    kind: 'clinical',
+  },
+  {
+    id: 'pink',
+    name: 'Pink',
+    meaning: 'Child Abduction',
+    extension: '5666',
+    color: '#ad1457',
+    kind: 'clinical',
+  },
+  {
+    id: 'black',
+    name: 'Black',
+    meaning: 'Death',
+    extension: '5777',
+    color: '#212121',
+    kind: 'clinical',
+  },
+  {
+    id: 'red',
+    name: 'Red',
+    meaning: 'Fire',
+    extension: '6000',
+    color: '#c62828',
+    kind: 'admin',
+  },
+  {
+    id: 'violet',
+    name: 'Violet',
+    meaning: 'Violence',
+    extension: '6111',
+    color: '#6a1b9a',
+    kind: 'admin',
+  },
+  {
+    id: 'brown',
+    name: 'Brown',
+    meaning: 'Bomb Threat',
+    extension: '6222',
+    color: '#5d4037',
+    kind: 'admin',
+  },
+]
+
+/** Quick dial — extensions from SNHC Apps Script / directory (not dummy). */
 export const HELPDESK_CONTACTS = [
   { id: 'it', name: 'IT Helpdesk', extension: '1559' },
-  { id: 'reception', name: 'Main Reception', extension: '1100' },
+  { id: 'reception', name: 'Main Reception', extension: '1500' },
   { id: 'helpdesk', name: 'H24 Help', extension: '1500' },
   { id: 'fire', name: 'Fire Control', extension: '1099' },
   { id: 'er', name: 'ER Reception', extension: '1080' },

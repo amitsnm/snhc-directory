@@ -16,6 +16,7 @@ const HOME_CARD_META: Record<
   Exclude<PortalPage, 'home'>,
   { icon: string; accent: string }
 > = {
+  emergency: { icon: 'EC', accent: 'gold' },
   helpdesk: { icon: 'HD', accent: 'teal' },
   'tariff-master': { icon: 'TM', accent: 'green' },
   intercom: { icon: 'IC', accent: 'gold' },
