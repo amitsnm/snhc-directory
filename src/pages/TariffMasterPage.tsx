@@ -96,43 +96,45 @@ export function TariffMasterPage({ title = 'Tariff Master', presetTypes }: Props
   return (
     <section className="portal-page tariff-master-page" aria-label={title}>
       <div className="toolbar service-toolbar">
-        <input
-          type="search"
-          className="toolbar-search"
-          placeholder="Search item, code, department…"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          aria-label="Search tariff items"
-          disabled={loadState !== 'ready'}
-        />
-        <select
-          className="toolbar-select toolbar-select-wide"
-          value={department}
-          onChange={(e) => setDepartment(e.target.value)}
-          aria-label="Department"
-          disabled={loadState !== 'ready'}
-        >
-          <option value="">All departments</option>
-          {departments.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </select>
-        <select
-          className="toolbar-select toolbar-select-wide"
-          value={billing}
-          onChange={(e) => setBilling(e.target.value)}
-          aria-label="Billing category"
-          disabled={loadState !== 'ready'}
-        >
-          <option value="">All billing</option>
-          {billingCategories.map((b) => (
-            <option key={b} value={b}>
-              {b}
-            </option>
-          ))}
-        </select>
+        <div className="toolbar-main">
+          <input
+            type="search"
+            className="toolbar-search"
+            placeholder="Search item, code, department…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search tariff items"
+            disabled={loadState !== 'ready'}
+          />
+          <select
+            className="toolbar-select toolbar-select-wide"
+            value={department}
+            onChange={(e) => setDepartment(e.target.value)}
+            aria-label="Department"
+            disabled={loadState !== 'ready'}
+          >
+            <option value="">All departments</option>
+            {departments.map((d) => (
+              <option key={d} value={d}>
+                {d}
+              </option>
+            ))}
+          </select>
+          <select
+            className="toolbar-select toolbar-select-wide"
+            value={billing}
+            onChange={(e) => setBilling(e.target.value)}
+            aria-label="Billing category"
+            disabled={loadState !== 'ready'}
+          >
+            <option value="">All billing</option>
+            {billingCategories.map((b) => (
+              <option key={b} value={b}>
+                {b}
+              </option>
+            ))}
+          </select>
+        </div>
         <p className="toolbar-count">
           {loadState === 'loading'
             ? 'Loading tariff master…'

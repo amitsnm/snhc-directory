@@ -527,6 +527,37 @@ select {
 
 .service-toolbar {
   margin-bottom: 0.85rem;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 0.75rem;
+}
+
+.service-toolbar .toolbar-main {
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.service-toolbar .toolbar-search {
+  flex: 0 1 220px;
+  width: 220px;
+  max-width: 220px;
+}
+
+.service-toolbar .toolbar-select,
+.service-toolbar .toolbar-select-wide {
+  flex: 0 0 170px;
+  width: 170px;
+  max-width: 170px;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+
+.service-toolbar .toolbar-count {
+  margin-left: auto;
+  flex: 0 0 auto;
+  text-align: right;
 }
 
 .service-table-wrap {
@@ -534,7 +565,7 @@ select {
 }
 
 .service-table {
-  min-width: 720px;
+  min-width: 640px;
   width: 100%;
   table-layout: fixed;
   font-size: 0.95rem;
@@ -542,22 +573,22 @@ select {
 
 .service-table th:nth-child(1),
 .service-table td:nth-child(1) {
-  width: 34%;
+  width: 26%;
 }
 
 .service-table th:nth-child(2),
 .service-table td:nth-child(2) {
-  width: 10%;
+  width: 11%;
 }
 
 .service-table th:nth-child(3),
 .service-table td:nth-child(3) {
-  width: 12%;
+  width: 14%;
 }
 
 .service-table th:nth-child(4),
 .service-table td:nth-child(4) {
-  width: 16%;
+  width: 20%;
 }
 
 .service-table th:nth-child(5),
@@ -567,21 +598,16 @@ select {
 
 .service-table th:nth-child(6),
 .service-table td:nth-child(6) {
-  width: 12%;
+  width: 13%;
 }
 
 .cell-service-item {
   font-weight: 600;
   color: var(--ink) !important;
   white-space: normal;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
   word-break: break-word;
   line-height: 1.35;
-  max-width: 22rem;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
   vertical-align: top;
 }
 
@@ -1883,6 +1909,33 @@ select {
     align-items: stretch;
     gap: 0.55rem;
     padding: 0.65rem;
+  }
+
+  .service-toolbar {
+    flex-wrap: wrap;
+  }
+
+  .service-toolbar .toolbar-main {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .service-toolbar .toolbar-search,
+  .service-toolbar .toolbar-select,
+  .service-toolbar .toolbar-select-wide {
+    flex: 1 1 calc(50% - 0.25rem);
+    width: auto;
+    max-width: none;
+  }
+
+  .service-toolbar .toolbar-search {
+    flex: 1 1 100%;
+  }
+
+  .service-toolbar .toolbar-count {
+    margin-left: 0;
+    width: 100%;
+    text-align: left;
   }
 
   .toolbar-main {
