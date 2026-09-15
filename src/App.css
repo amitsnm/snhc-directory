@@ -534,8 +534,55 @@ select {
 }
 
 .service-table {
-  min-width: 860px;
+  min-width: 720px;
+  width: 100%;
+  table-layout: fixed;
   font-size: 0.95rem;
+}
+
+.service-table th:nth-child(1),
+.service-table td:nth-child(1) {
+  width: 34%;
+}
+
+.service-table th:nth-child(2),
+.service-table td:nth-child(2) {
+  width: 10%;
+}
+
+.service-table th:nth-child(3),
+.service-table td:nth-child(3) {
+  width: 12%;
+}
+
+.service-table th:nth-child(4),
+.service-table td:nth-child(4) {
+  width: 16%;
+}
+
+.service-table th:nth-child(5),
+.service-table td:nth-child(5) {
+  width: 16%;
+}
+
+.service-table th:nth-child(6),
+.service-table td:nth-child(6) {
+  width: 12%;
+}
+
+.cell-service-item {
+  font-weight: 600;
+  color: var(--ink) !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  line-height: 1.35;
+  max-width: 22rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  vertical-align: top;
 }
 
 .price-cell {
