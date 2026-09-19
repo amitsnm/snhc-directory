@@ -115,8 +115,8 @@ def main() -> None:
         "Email — Official email if available",
         "Status — Active or Inactive",
         "",
-        f"Pre-filled rows: {len(sorted_rows)} contacts from SNHC Extension Directory (as on 05-Sep-2026).",
-        "Blank cells are intentional — please update and return to IT / Admin.",
+        f"Pre-filled rows: {len(sorted_rows)} contacts from SNHC Extension Directory (as on 15-Sep-2026).",
+        "Blank Section / Floor / Mobile / Email — please fill location details and return to IT / Admin.",
     ]
     for i, line in enumerate(notes, 2):
         cell = ws2.cell(i, 1, line)

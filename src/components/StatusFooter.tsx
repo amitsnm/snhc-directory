@@ -19,7 +19,7 @@ function StatusDot({ state }: { state: SyncStatus['ldap'] }) {
 
 function formatLastSync(iso: string | null): string {
   const d = iso ? new Date(iso) : null
-  if (!d || Number.isNaN(d.getTime())) return '05-Sep-2026 00:00:00'
+  if (!d || Number.isNaN(d.getTime())) return '15-Sep-2026 00:00:00'
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   const dd = String(d.getDate()).padStart(2, '0')
   const mon = months[d.getMonth()]

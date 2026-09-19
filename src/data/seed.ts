@@ -9,9 +9,9 @@ export const DEFAULT_CONFIG: AppConfig = {
   syncIntervalMs: Number(import.meta.env.VITE_SYNC_INTERVAL_MS ?? 60_000),
 }
 
-/** Header strip — SNHC Extension Directory (Apps Script, as on 05-Sep-2026) */
+/** Header strip — SNHC Extension Directory (as on 15-Sep-2026) */
 export const COMPLEX_META = {
-  asOn: '05-Sep-2026',
+  asOn: '15-Sep-2026',
   reception: '1500',
   epabx: '',
   fax: '',
@@ -141,7 +141,7 @@ export const SEED_DIRECTORY: DirectoryEntry[] = (snhcDirectory as Array<Partial<
     extension: row.extension ?? '',
     status: row.status === 'inactive' ? 'inactive' : 'active',
     ldapDn: row.ldapDn,
-    updatedAt: row.updatedAt ?? '2026-09-05T00:00:00.000Z',
+    updatedAt: row.updatedAt ?? '2026-09-15T00:00:00.000Z',
   }),
 )
 
